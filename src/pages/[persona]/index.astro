@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import ListaPosts from '../../components/ListaPosts.astro';
+import { getPersonas, getPosts, url } from '../../lib/sitio';
+
+export async function getStaticPaths() {
+  const personas = await getPersonas();
+  return Promise.all(
+    personas.map(async (persona) => ({
+      params: { persona: persona.slug },
+      props: { persona, posts: await getPosts(persona.slug) },
+    })),
+  );
+}
+
+const { persona, posts } = Astro.props;
+---
+
+<Base titulo={persona.nombre} descripcion={persona.bio || persona.nicho} persona={persona}>
+  {
+    persona.imagen_cabecera && (
+      <div class="contenedor">
+        <img class="banner" src={url(persona.imagen_cabecera)} alt="" />
+      </div>
+    )
+  }
+  <section class="contenedor seccion-cabecera">
+    {persona.nicho && <p class="etiqueta-seccion">{persona.nicho}</p>}
+    <h1 class="seccion-cabecera__nombre">{persona.nombre}</h1>
+    {persona.bio && <p class="seccion-cabecera__bio">{persona.bio}</p>}
+  </section>
+
+  <section class="contenedor bloque" aria-label="Posts">
+    {
+      posts.length > 0 ? (
+        <ListaPosts posts={posts} />
+      ) : (
+        <p class="vacio">{persona.nombre} todavía no ha publicado nada.</p>
+      )
+    }
+  </section>
+</Base>

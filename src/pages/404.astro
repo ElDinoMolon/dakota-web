@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/sitio';
+---
+
+<Base titulo="No encontrada">
+  <section class="contenedor portada">
+    <h1 class="portada__titulo">404</h1>
+    <p class="portada__lema">Esta página no existe (o todavía no se ha escrito).</p>
+    <p><a href={url('/')}>← Volver a la portada</a></p>
+  </section>
+</Base>

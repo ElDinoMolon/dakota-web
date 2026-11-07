@@ -1,0 +1,16 @@
+{
+  "name": "blog-colectivo",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/optimize-images.mjs",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.7",
+    "astro": "^7.3.8",
+    "sharp": "^0.35.5"
+  }
+}

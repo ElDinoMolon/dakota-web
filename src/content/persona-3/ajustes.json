@@ -1,0 +1,11 @@
+{
+  "nombre": "Persona 3",
+  "nicho": "Nicho de ejemplo 3",
+  "bio": "Esta sección fija sus propios colores (siempre oscuros) y usa Space Grotesk.",
+  "color_principal": "#7DF9C5",
+  "color_fondo": "#10131F",
+  "color_texto": "#E6E9F5",
+  "fuente": "space-grotesk",
+  "tamano_texto": "normal",
+  "imagen_cabecera": ""
+}

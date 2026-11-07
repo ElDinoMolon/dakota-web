@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import ListaPosts from '../components/ListaPosts.astro';
+import { NOMBRE_BLOG, LEMA, getPersonas, getPosts, url } from '../lib/sitio';
+import { estiloAcento } from '../lib/fuentes';
+
+const personas = await getPersonas();
+const posts = await getPosts();
+const recientes = posts.slice(0, 8);
+const contar = (slug: string) => posts.filter((p) => p.persona === slug).length;
+---
+
+<Base>
+  <section class="contenedor portada">
+    <h1 class="portada__titulo">{NOMBRE_BLOG}</h1>
+    <p class="portada__lema">{LEMA}</p>
+  </section>
+
+  <section class="contenedor bloque" aria-labelledby="h-secciones">
+    <h2 id="h-secciones" class="etiqueta-seccion">Secciones</h2>
+    <div class="tarjetas">
+      {
+        personas.map((p) => (
+          <a class="tarjeta" href={url(`/${p.slug}/`)} style={estiloAcento(p)}>
+            <span class="tarjeta__nicho">{p.nicho || 'Sección'}</span>
+            <span class="tarjeta__nombre">{p.nombre}</span>
+            {p.bio && <span class="tarjeta__bio">{p.bio}</span>}
+            <span class="tarjeta__pie">
+              {contar(p.slug)} {contar(p.slug) === 1 ? 'post' : 'posts'} →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="contenedor bloque" aria-labelledby="h-recientes">
+    <h2 id="h-recientes" class="etiqueta-seccion">Lo último</h2>
+    {
+      recientes.length > 0 ? (
+        <ListaPosts posts={recientes} personas={personas} mostrarPersona />
+      ) : (
+        <p class="vacio">Todavía no hay posts. ¡Que alguien rompa el hielo!</p>
+      )
+    }
+  </section>
+</Base>

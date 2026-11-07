@@ -1,0 +1,48 @@
+---
+import { formatearFecha, url, type Persona } from '../lib/sitio';
+import { estiloAcento } from '../lib/fuentes';
+
+type Item = { entrada: { data: { title: string; date: Date; description: string; cover?: string } }; persona: string; slug: string };
+
+interface Props {
+  posts: Item[];
+  /** Mostrar de quién es cada post (portada). */
+  mostrarPersona?: boolean;
+  personas?: Persona[];
+}
+
+const { posts, mostrarPersona = false, personas = [] } = Astro.props;
+const porSlug = new Map(personas.map((p) => [p.slug, p]));
+---
+
+<ul class="lista-posts">
+  {
+    posts.map(({ entrada, persona, slug }) => {
+      const autor = porSlug.get(persona);
+      const { title, date, description, cover } = entrada.data;
+      return (
+        <li class="post-item" style={autor ? estiloAcento(autor) : undefined}>
+          <a class="post-item__enlace" href={url(`/${persona}/${slug}/`)}>
+            <div class="post-item__texto">
+              <p class="meta">
+                <time datetime={date.toISOString()}>{formatearFecha(date)}</time>
+                {mostrarPersona && autor && (
+                  <>
+                    <span class="meta__sep">·</span>
+                    <span class="etiqueta">
+                      <span class="punto" aria-hidden="true" />
+                      {autor.nombre}
+                    </span>
+                  </>
+                )}
+              </p>
+              <h3 class="post-item__titulo">{title}</h3>
+              {description && <p class="post-item__desc">{description}</p>}
+            </div>
+            {cover && <img class="post-item__img" src={url(cover)} alt="" loading="lazy" decoding="async" />}
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

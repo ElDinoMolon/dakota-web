@@ -1,0 +1,11 @@
+{
+  "nombre": "Persona 1",
+  "nicho": "Nicho de ejemplo 1",
+  "bio": "Aquí va una frase sobre de qué habla esta persona. Se edita desde el panel.",
+  "color_principal": "#C8451B",
+  "color_fondo": "",
+  "color_texto": "",
+  "fuente": "sistema",
+  "tamano_texto": "normal",
+  "imagen_cabecera": ""
+}

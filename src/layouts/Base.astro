@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { NOMBRE_BLOG, LEMA, url, getPersonas, type Persona } from '../lib/sitio';
+import { estiloPersona, estiloAcento, urlGoogleFonts } from '../lib/fuentes';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  /** Si se pasa, la página usa los ajustes de estilo de esa persona. */
+  persona?: Persona;
+}
+
+const { titulo, descripcion = LEMA, persona } = Astro.props;
+const personas = await getPersonas();
+const tituloCompleto = titulo ? `${titulo} · ${NOMBRE_BLOG}` : NOMBRE_BLOG;
+const fuenteGoogle = urlGoogleFonts(persona);
+const rutaActual = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="es" style={estiloPersona(persona)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    {
+      fuenteGoogle && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link rel="stylesheet" href={fuenteGoogle} />
+        </>
+      )
+    }
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <header class="cabecera">
+      <div class="contenedor cabecera__fila">
+        <a class="marca" href={url('/')}>{NOMBRE_BLOG}</a>
+        <nav class="menu" aria-label="Secciones">
+          {
+            personas.map((p) => (
+              <a
+                href={url(`/${p.slug}/`)}
+                style={estiloAcento(p)}
+                aria-current={rutaActual.startsWith(url(`/${p.slug}/`)) ? 'page' : undefined}
+              >
+                <span class="punto" aria-hidden="true" />
+                {p.nombre}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <span>© {new Date().getFullYear()} {NOMBRE_BLOG}</span>
+        <span class="pie__puntos" aria-hidden="true">
+          {personas.map((p) => <span class="punto" style={estiloAcento(p)} />)}
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

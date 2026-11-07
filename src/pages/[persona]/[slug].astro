@@ -1,0 +1,42 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatearFecha, getPersonas, getPosts, url } from '../../lib/sitio';
+
+export async function getStaticPaths() {
+  const personas = await getPersonas();
+  const posts = await getPosts();
+  return posts.flatMap(({ entrada, persona, slug }) => {
+    const datosPersona = personas.find((p) => p.slug === persona);
+    return datosPersona ? [{ params: { persona, slug }, props: { entrada, persona: datosPersona } }] : [];
+  });
+}
+
+const { entrada, persona } = Astro.props;
+const { Content } = await render(entrada);
+const { title, date, description, cover } = entrada.data;
+---
+
+<Base titulo={`${title} · ${persona.nombre}`} descripcion={description} persona={persona}>
+  <article class="contenedor contenedor--lectura articulo">
+    <header class="articulo__cabecera">
+      <p class="meta">
+        <a class="etiqueta" href={url(`/${persona.slug}/`)}>
+          <span class="punto" aria-hidden="true"></span>
+          {persona.nombre}
+        </a>
+        <span class="meta__sep">·</span>
+        <time datetime={date.toISOString()}>{formatearFecha(date)}</time>
+      </p>
+      <h1 class="articulo__titulo">{title}</h1>
+      {description && <p class="articulo__desc">{description}</p>}
+    </header>
+    {cover && <img class="articulo__portada" src={url(cover)} alt="" />}
+    <div class="prosa">
+      <Content />
+    </div>
+    <p class="articulo__volver">
+      <a href={url(`/${persona.slug}/`)}>← Más de {persona.nombre}</a>
+    </p>
+  </article>
+</Base>

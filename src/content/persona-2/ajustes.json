@@ -1,0 +1,11 @@
+{
+  "nombre": "Persona 2",
+  "nicho": "Nicho de ejemplo 2",
+  "bio": "Esta sección usa la fuente Lora y un verde propio, y hereda el modo claro/oscuro automático.",
+  "color_principal": "#2F7D5A",
+  "color_fondo": "",
+  "color_texto": "",
+  "fuente": "lora",
+  "tamano_texto": "grande",
+  "imagen_cabecera": ""
+}

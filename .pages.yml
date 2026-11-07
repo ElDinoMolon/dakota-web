@@ -1,0 +1,196 @@
+# Configuración del panel Pages CMS (https://pagescms.org/docs/)
+#
+# AÑADIR UNA PERSONA NUEVA:
+#   1. Copia la carpeta src/content/persona-3 → src/content/<nombre-nuevo>  (sin tildes ni espacios)
+#   2. Copia public/images/persona-3 → public/images/<nombre-nuevo>
+#   3. Copia el bloque "PERSONA 3" de abajo (de "- name: persona-3" hasta el final de su bloque)
+#      y cambia "persona-3" por "<nombre-nuevo>" en todas partes del bloque (8 veces, busca y reemplaza).
+#   4. Edita ajustes.json de la carpeta nueva y borra los posts de ejemplo.
+
+# Las fotos se suben a public/images/<persona>/ y en la web se ven como /images/<persona>/foto.jpg
+media:
+  input: public/images
+  output: /images
+  rename: safe
+  categories: [image]
+
+content:
+  # ===================================================================== PERSONA 1
+  - name: persona-1
+    label: Persona 1
+    type: group
+    items:
+      - name: persona-1-posts
+        label: Posts
+        type: collection
+        path: src/content/persona-1
+        exclude: [ajustes.json]
+        subfolders: false
+        filename: "{primary}.md"
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - { name: title, label: Título, type: string, required: true }
+          - { name: date, label: Fecha, type: date, required: true, options: { format: yyyy-MM-dd } }
+          - { name: description, label: Descripción corta, type: string, options: { maxlength: 200 }, description: "Sale en el listado, debajo del título." }
+          - name: cover
+            label: Imagen de portada (opcional)
+            type: image
+            options: { path: public/images/persona-1 }
+          - name: body
+            label: Texto
+            type: rich-text
+            options: { format: markdown, path: public/images/persona-1 }
+      - name: persona-1-ajustes
+        label: Mi sección y estilo
+        type: file
+        path: src/content/persona-1/ajustes.json
+        format: json
+        operations: { delete: false }
+        fields:
+          - { name: nombre, label: Nombre que se ve en la web, type: string, required: true }
+          - { name: nicho, label: De qué va tu sección (nicho), type: string }
+          - { name: bio, label: Bio corta, type: text }
+          - { name: color_principal, label: Color principal, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #C8451B" }, description: "Formato #RRGGBB (ej. #C8451B). Vacío = el de la web." }
+          - { name: color_fondo, label: Color de fondo, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #FFFFFF" }, description: "Si lo rellenas, tu sección usa SIEMPRE este color (ignora el modo oscuro). Vacío = automático claro/oscuro." }
+          - { name: color_texto, label: Color del texto, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #222222" }, description: "Rellénalo junto con el de fondo para que se lea bien." }
+          - name: fuente
+            label: Fuente
+            type: select
+            default: sistema
+            options: { values: [sistema, inter, lora, playfair, space-grotesk, jetbrains-mono] }
+            description: "sistema = la rápida del dispositivo · inter = moderna · lora = serif suave · playfair = serif elegante · space-grotesk = geométrica · jetbrains-mono = código"
+          - name: tamano_texto
+            label: Tamaño del texto
+            type: select
+            default: normal
+            options: { values: [pequeno, normal, grande] }
+          - name: imagen_cabecera
+            label: Imagen de cabecera (opcional)
+            type: image
+            options: { path: public/images/persona-1 }
+
+  # ===================================================================== PERSONA 2
+  - name: persona-2
+    label: Persona 2
+    type: group
+    items:
+      - name: persona-2-posts
+        label: Posts
+        type: collection
+        path: src/content/persona-2
+        exclude: [ajustes.json]
+        subfolders: false
+        filename: "{primary}.md"
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - { name: title, label: Título, type: string, required: true }
+          - { name: date, label: Fecha, type: date, required: true, options: { format: yyyy-MM-dd } }
+          - { name: description, label: Descripción corta, type: string, options: { maxlength: 200 }, description: "Sale en el listado, debajo del título." }
+          - name: cover
+            label: Imagen de portada (opcional)
+            type: image
+            options: { path: public/images/persona-2 }
+          - name: body
+            label: Texto
+            type: rich-text
+            options: { format: markdown, path: public/images/persona-2 }
+      - name: persona-2-ajustes
+        label: Mi sección y estilo
+        type: file
+        path: src/content/persona-2/ajustes.json
+        format: json
+        operations: { delete: false }
+        fields:
+          - { name: nombre, label: Nombre que se ve en la web, type: string, required: true }
+          - { name: nicho, label: De qué va tu sección (nicho), type: string }
+          - { name: bio, label: Bio corta, type: text }
+          - { name: color_principal, label: Color principal, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #C8451B" }, description: "Formato #RRGGBB (ej. #C8451B). Vacío = el de la web." }
+          - { name: color_fondo, label: Color de fondo, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #FFFFFF" }, description: "Si lo rellenas, tu sección usa SIEMPRE este color (ignora el modo oscuro). Vacío = automático claro/oscuro." }
+          - { name: color_texto, label: Color del texto, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #222222" }, description: "Rellénalo junto con el de fondo para que se lea bien." }
+          - name: fuente
+            label: Fuente
+            type: select
+            default: sistema
+            options: { values: [sistema, inter, lora, playfair, space-grotesk, jetbrains-mono] }
+            description: "sistema = la rápida del dispositivo · inter = moderna · lora = serif suave · playfair = serif elegante · space-grotesk = geométrica · jetbrains-mono = código"
+          - name: tamano_texto
+            label: Tamaño del texto
+            type: select
+            default: normal
+            options: { values: [pequeno, normal, grande] }
+          - name: imagen_cabecera
+            label: Imagen de cabecera (opcional)
+            type: image
+            options: { path: public/images/persona-2 }
+
+  # ===================================================================== PERSONA 3
+  - name: persona-3
+    label: Persona 3
+    type: group
+    items:
+      - name: persona-3-posts
+        label: Posts
+        type: collection
+        path: src/content/persona-3
+        exclude: [ajustes.json]
+        subfolders: false
+        filename: "{primary}.md"
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - { name: title, label: Título, type: string, required: true }
+          - { name: date, label: Fecha, type: date, required: true, options: { format: yyyy-MM-dd } }
+          - { name: description, label: Descripción corta, type: string, options: { maxlength: 200 }, description: "Sale en el listado, debajo del título." }
+          - name: cover
+            label: Imagen de portada (opcional)
+            type: image
+            options: { path: public/images/persona-3 }
+          - name: body
+            label: Texto
+            type: rich-text
+            options: { format: markdown, path: public/images/persona-3 }
+      - name: persona-3-ajustes
+        label: Mi sección y estilo
+        type: file
+        path: src/content/persona-3/ajustes.json
+        format: json
+        operations: { delete: false }
+        fields:
+          - { name: nombre, label: Nombre que se ve en la web, type: string, required: true }
+          - { name: nicho, label: De qué va tu sección (nicho), type: string }
+          - { name: bio, label: Bio corta, type: text }
+          - { name: color_principal, label: Color principal, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #C8451B" }, description: "Formato #RRGGBB (ej. #C8451B). Vacío = el de la web." }
+          - { name: color_fondo, label: Color de fondo, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #FFFFFF" }, description: "Si lo rellenas, tu sección usa SIEMPRE este color (ignora el modo oscuro). Vacío = automático claro/oscuro." }
+          - { name: color_texto, label: Color del texto, type: string, pattern: { regex: "^(#[0-9a-fA-F]{6})?$", message: "Formato #RRGGBB, por ejemplo #222222" }, description: "Rellénalo junto con el de fondo para que se lea bien." }
+          - name: fuente
+            label: Fuente
+            type: select
+            default: sistema
+            options: { values: [sistema, inter, lora, playfair, space-grotesk, jetbrains-mono] }
+            description: "sistema = la rápida del dispositivo · inter = moderna · lora = serif suave · playfair = serif elegante · space-grotesk = geométrica · jetbrains-mono = código"
+          - name: tamano_texto
+            label: Tamaño del texto
+            type: select
+            default: normal
+            options: { values: [pequeno, normal, grande] }
+          - name: imagen_cabecera
+            label: Imagen de cabecera (opcional)
+            type: image
+            options: { path: public/images/persona-3 }

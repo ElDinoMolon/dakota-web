@@ -1,0 +1,486 @@
+/* ==========================================================================
+   DISEÑO COMÚN  ·  todo el aspecto de la web vive en este archivo
+   Orden: 1 variables · 2 base · 3 cabecera/pie · 4 portada · 5 posts · 6 artículo
+   Cada persona puede sobrescribir --accent, --bg, --text, --font-* y --base-size
+   desde su archivo de ajustes (se aplican en <html> solo en las páginas de su sección).
+   ========================================================================== */
+
+/* 1 ─ Variables ──────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: light dark;
+
+  /* Colores (modo claro) */
+  --bg: #fbf8f3;
+  --text: #2b2622;
+  --accent: #c8451b;
+
+  /* Derivados: se recalculan solos si una persona cambia --bg, --text o --accent */
+  --muted: color-mix(in srgb, var(--text) 62%, var(--bg));
+  --line: color-mix(in srgb, var(--text) 16%, var(--bg));
+  --surface: color-mix(in srgb, var(--text) 5%, var(--bg));
+
+  /* Tipografía */
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', Consolas, monospace;
+  --base-size: 106.25%;
+
+  /* Medidas */
+  --ancho: 64rem;
+  --ancho-lectura: 42rem;
+  --radio: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17130f;
+    --text: #eee7dc;
+    --accent: #f08a5d;
+  }
+}
+
+/* 2 ─ Base ───────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--base-size);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+}
+
+main {
+  flex: 1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.1em;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.contenedor--lectura {
+  max-width: calc(var(--ancho-lectura) + 2.5rem);
+}
+
+.saltar {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.5rem 1rem;
+  z-index: 10;
+}
+.saltar:focus {
+  left: 0;
+}
+
+/* Elementos pequeños que se repiten */
+.punto {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+.etiqueta,
+.etiqueta-seccion,
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  text-decoration: none;
+}
+
+.etiqueta-seccion {
+  color: var(--muted);
+  margin: 0 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.etiqueta-seccion::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.meta {
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vacio {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* 3 ─ Cabecera, menú y pie ───────────────────────────────────────────────── */
+.cabecera {
+  border-bottom: 1px solid var(--line);
+}
+
+.cabecera__fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1rem;
+}
+
+.marca {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.marca:hover {
+  color: var(--text);
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.menu a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.menu a:hover,
+.menu a[aria-current='page'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  color: inherit;
+}
+
+.pie {
+  margin-top: 4rem;
+  border-top: 1px solid var(--line);
+  padding-block: 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.pie .contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.pie__puntos {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+/* 4 ─ Portada y tarjetas de sección ──────────────────────────────────────── */
+.portada {
+  padding-block: clamp(2.5rem, 8vw, 5.5rem) 1rem;
+}
+.portada__titulo {
+  font-size: clamp(2.6rem, 10vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.portada__lema {
+  margin: 1rem 0 0;
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.bloque {
+  margin-top: 3rem;
+}
+
+.tarjetas {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--accent);
+  border-radius: var(--radio);
+  text-decoration: none;
+  background: var(--surface);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tarjeta:hover {
+  color: inherit;
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--accent);
+}
+.tarjeta__nicho {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.tarjeta__nombre {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.tarjeta__bio {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.tarjeta__pie {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* 5 ─ Listado de posts y cabecera de sección ─────────────────────────────── */
+.lista-posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-item {
+  border-bottom: 1px solid var(--line);
+}
+.post-item:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.post-item__enlace {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  text-decoration: none;
+}
+.post-item__enlace:hover {
+  color: inherit;
+}
+.post-item__titulo {
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  transition: color 0.15s;
+}
+.post-item__enlace:hover .post-item__titulo {
+  color: var(--accent);
+}
+.post-item__desc {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.post-item__img {
+  width: 6.5rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  flex: none;
+}
+
+.banner {
+  width: 100%;
+  height: clamp(10rem, 28vw, 18rem);
+  object-fit: cover;
+  border-radius: var(--radio);
+  margin-top: 1.5rem;
+}
+
+.seccion-cabecera {
+  padding-block: 2.5rem 0;
+}
+.seccion-cabecera__nombre {
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+}
+.seccion-cabecera__nombre::after {
+  content: '';
+  display: block;
+  height: 0.28em;
+  margin-top: 0.1em;
+  background: var(--accent);
+  border-radius: 999px;
+  width: 45%;
+}
+.seccion-cabecera__bio {
+  max-width: 36rem;
+  margin: 1.25rem 0 0;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* 6 ─ Artículo ───────────────────────────────────────────────────────────── */
+.articulo {
+  padding-block: 2.5rem 0;
+}
+.articulo__titulo {
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+.articulo__desc {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin: 0.9rem 0 0;
+}
+.articulo__portada {
+  width: 100%;
+  max-height: 28rem;
+  object-fit: cover;
+  border-radius: var(--radio);
+  margin-top: 2rem;
+}
+.articulo__volver {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.prosa {
+  margin-top: 2rem;
+  font-size: 1.05rem;
+}
+.prosa > * + * {
+  margin-top: 1.1em;
+}
+.prosa h2 {
+  font-size: 1.8rem;
+  margin-top: 2em;
+}
+.prosa h3 {
+  font-size: 1.4rem;
+  margin-top: 1.6em;
+}
+.prosa ul,
+.prosa ol {
+  padding-left: 1.4rem;
+}
+.prosa li + li {
+  margin-top: 0.3em;
+}
+.prosa blockquote {
+  margin-inline: 0;
+  padding: 0.2rem 0 0.2rem 1.25rem;
+  border-left: 4px solid var(--accent);
+  font-family: var(--font-heading);
+  font-size: 1.2em;
+  color: var(--muted);
+}
+.prosa img {
+  border-radius: var(--radio);
+  margin-inline: auto;
+}
+.prosa pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+.prosa code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+.prosa hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin-block: 2em;
+}
+
+/* Responsive y accesibilidad ─────────────────────────────────────────────── */
+@media (max-width: 30rem) {
+  .post-item__img {
+    width: 4.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+  .tarjeta:hover {
+    transform: none;
+  }
+}
