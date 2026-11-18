@@ -1,10 +1,10 @@
 # Configuración del panel Pages CMS (https://pagescms.org/docs/)
 #
 # AÑADIR UNA PERSONA NUEVA:
-#   1. Copia la carpeta src/content/persona-3 → src/content/<nombre-nuevo>  (sin tildes ni espacios)
-#   2. Copia public/images/persona-3 → public/images/<nombre-nuevo>
-#   3. Copia el bloque "PERSONA 3" de abajo (de "- name: persona-3" hasta el final de su bloque)
-#      y cambia "persona-3" por "<nombre-nuevo>" en todas partes del bloque (8 veces, busca y reemplaza).
+#   1. Copia la carpeta src/content/jancarlos → src/content/<nombre-nuevo>  (sin tildes ni espacios)
+#   2. Copia public/images/jancarlos → public/images/<nombre-nuevo>
+#   3. Copia el bloque "PERSONA 3" de abajo (de "- name: jancarlos" hasta el final de su bloque)
+#      y cambia "jancarlos" por "<nombre-nuevo>" en todas partes del bloque (8 veces, busca y reemplaza).
 #   4. Edita ajustes.json de la carpeta nueva y borra los posts de ejemplo.
 
 # Las fotos se suben a public/images/<persona>/ y en la web se ven como /images/<persona>/foto.jpg
@@ -16,14 +16,14 @@ media:
 
 content:
   # ===================================================================== PERSONA 1
-  - name: persona-1
-    label: Persona 1
+  - name: tumoni
+    label: Tumoni
     type: group
     items:
-      - name: persona-1-posts
+      - name: tumoni-posts
         label: Posts
         type: collection
-        path: src/content/persona-1
+        path: src/content/tumoni
         exclude: [ajustes.json]
         subfolders: false
         filename: "{primary}.md"
@@ -41,15 +41,15 @@ content:
           - name: cover
             label: Imagen de portada (opcional)
             type: image
-            options: { path: public/images/persona-1 }
+            options: { path: public/images/tumoni }
           - name: body
             label: Texto
             type: rich-text
-            options: { format: markdown, path: public/images/persona-1 }
-      - name: persona-1-ajustes
+            options: { format: markdown, path: public/images/tumoni }
+      - name: tumoni-ajustes
         label: Mi sección y estilo
         type: file
-        path: src/content/persona-1/ajustes.json
+        path: src/content/tumoni/ajustes.json
         format: json
         operations: { delete: false }
         fields:
@@ -73,17 +73,17 @@ content:
           - name: imagen_cabecera
             label: Imagen de cabecera (opcional)
             type: image
-            options: { path: public/images/persona-1 }
+            options: { path: public/images/tumoni }
 
   # ===================================================================== PERSONA 2
-  - name: persona-2
-    label: Persona 2
+  - name: elgepeese
+    label: Elgepeese
     type: group
     items:
-      - name: persona-2-posts
+      - name: elgepeese-posts
         label: Posts
         type: collection
-        path: src/content/persona-2
+        path: src/content/elgepeese
         exclude: [ajustes.json]
         subfolders: false
         filename: "{primary}.md"
@@ -101,15 +101,15 @@ content:
           - name: cover
             label: Imagen de portada (opcional)
             type: image
-            options: { path: public/images/persona-2 }
+            options: { path: public/images/elgepeese }
           - name: body
             label: Texto
             type: rich-text
-            options: { format: markdown, path: public/images/persona-2 }
-      - name: persona-2-ajustes
+            options: { format: markdown, path: public/images/elgepeese }
+      - name: elgepeese-ajustes
         label: Mi sección y estilo
         type: file
-        path: src/content/persona-2/ajustes.json
+        path: src/content/elgepeese/ajustes.json
         format: json
         operations: { delete: false }
         fields:
@@ -133,17 +133,17 @@ content:
           - name: imagen_cabecera
             label: Imagen de cabecera (opcional)
             type: image
-            options: { path: public/images/persona-2 }
+            options: { path: public/images/elgepeese }
 
   # ===================================================================== PERSONA 3
-  - name: persona-3
-    label: Persona 3
+  - name: jancarlos
+    label: Jan Carlos
     type: group
     items:
-      - name: persona-3-posts
+      - name: jancarlos-posts
         label: Posts
         type: collection
-        path: src/content/persona-3
+        path: src/content/jancarlos
         exclude: [ajustes.json]
         subfolders: false
         filename: "{primary}.md"
@@ -161,15 +161,15 @@ content:
           - name: cover
             label: Imagen de portada (opcional)
             type: image
-            options: { path: public/images/persona-3 }
+            options: { path: public/images/jancarlos }
           - name: body
             label: Texto
             type: rich-text
-            options: { format: markdown, path: public/images/persona-3 }
-      - name: persona-3-ajustes
+            options: { format: markdown, path: public/images/jancarlos }
+      - name: jancarlos-ajustes
         label: Mi sección y estilo
         type: file
-        path: src/content/persona-3/ajustes.json
+        path: src/content/jancarlos/ajustes.json
         format: json
         operations: { delete: false }
         fields:
@@ -193,4 +193,4 @@ content:
           - name: imagen_cabecera
             label: Imagen de cabecera (opcional)
             type: image
-            options: { path: public/images/persona-3 }
+            options: { path: public/images/jancarlos }

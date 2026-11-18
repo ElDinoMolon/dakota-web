@@ -8,12 +8,16 @@ interface Props {
   descripcion?: string;
   /** Si se pasa, la página usa los ajustes de estilo de esa persona. */
   persona?: Persona;
+  /** Estilo retro-pastel (solo portada). */
+  retro?: boolean;
 }
 
-const { titulo, descripcion = LEMA, persona } = Astro.props;
+const { titulo, descripcion = LEMA, persona, retro = false } = Astro.props;
 const personas = await getPersonas();
 const tituloCompleto = titulo ? `${titulo} · ${NOMBRE_BLOG}` : NOMBRE_BLOG;
-const fuenteGoogle = urlGoogleFonts(persona);
+const fuenteGoogle = retro
+  ? 'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400..700&display=swap'
+  : urlGoogleFonts(persona);
 const rutaActual = Astro.url.pathname;
 ---
 
@@ -35,7 +39,7 @@ const rutaActual = Astro.url.pathname;
       )
     }
   </head>
-  <body>
+  <body class={retro ? 'retro' : undefined}>
     <a class="saltar" href="#contenido">Saltar al contenido</a>
     <header class="cabecera">
       <div class="contenedor cabecera__fila">

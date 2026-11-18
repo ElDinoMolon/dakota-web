@@ -1,7 +1,7 @@
 ---
 title: "Hola, mundo"
 date: 2026-11-06
-description: "Probando colores propios en una sección."
+description: "Un post de ejemplo, bórralo cuando quieras."
 cover: ""
 ---
 

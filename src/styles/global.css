@@ -7,12 +7,12 @@
 
 /* 1 ─ Variables ──────────────────────────────────────────────────────────── */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   /* Colores (modo claro) */
-  --bg: #fbf8f3;
-  --text: #2b2622;
-  --accent: #c8451b;
+  --bg: #ffffff;
+  --text: #111111;
+  --accent: #1a56db;
 
   /* Derivados: se recalculan solos si una persona cambia --bg, --text o --accent */
   --muted: color-mix(in srgb, var(--text) 62%, var(--bg));
@@ -21,7 +21,7 @@
 
   /* Tipografía */
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-heading: var(--font-body);
   --font-mono: ui-monospace, 'SF Mono', Consolas, monospace;
   --base-size: 106.25%;
 
@@ -29,14 +29,6 @@
   --ancho: 64rem;
   --ancho-lectura: 42rem;
   --radio: 0.75rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #17130f;
-    --text: #eee7dc;
-    --accent: #f08a5d;
-  }
 }
 
 /* 2 ─ Base ───────────────────────────────────────────────────────────────── */
@@ -483,4 +475,133 @@ h3 {
   .tarjeta:hover {
     transform: none;
   }
+}
+
+/* 7 ─ Portada retro-pastel (solo la página principal: <body class="retro">) ─
+   Las secciones de cada persona NO usan esto: son blancas y sin adornos. */
+body.retro {
+  --bg: #fff3e2;
+  --text: #2d2440;
+  --accent: #d6336c;
+  --muted: #6b5f80;
+  --line: #2d2440;
+  --surface: #ffffff;
+  --font-heading: 'Press Start 2P', ui-monospace, monospace;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  background-image: radial-gradient(#f0d3ab 1.6px, transparent 1.6px);
+  background-size: 22px 22px;
+}
+.retro .cabecera {
+  background: #cdb4db;
+  border-bottom: 3px solid var(--text);
+}
+.retro .marca {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.retro .menu a {
+  background: #fff;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0 var(--text);
+  font-weight: 600;
+}
+.retro .menu a:hover {
+  background: #ffe066;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--text);
+}
+.retro .portada {
+  padding-block: clamp(2.5rem, 8vw, 5rem) 0.5rem;
+}
+.retro .portada__titulo {
+  font-size: clamp(1.7rem, 7vw, 3.4rem);
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-shadow: 4px 4px 0 #ffc8dd;
+}
+.retro .portada__lema {
+  display: inline-block;
+  background: #fff;
+  border: 2px solid var(--text);
+  box-shadow: 3px 3px 0 var(--text);
+  padding: 0.35rem 0.8rem;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+}
+.retro .etiqueta-seccion {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  color: var(--text);
+}
+.retro .etiqueta-seccion::after {
+  height: 0;
+  background: none;
+  border-top: 3px dashed var(--text);
+}
+.retro .tarjeta {
+  --pastel: #ffc8dd;
+  background: var(--pastel);
+  border: 3px solid var(--text);
+  border-radius: 0.6rem;
+  box-shadow: 6px 6px 0 var(--text);
+  overflow: hidden;
+}
+.retro .tarjeta:nth-child(5n + 2) { --pastel: #bde0fe; }
+.retro .tarjeta:nth-child(5n + 3) { --pastel: #b9fbc0; }
+.retro .tarjeta:nth-child(5n + 4) { --pastel: #fff1a8; }
+.retro .tarjeta:nth-child(5n + 5) { --pastel: #e2cfff; }
+.retro .tarjeta::before {
+  content: '';
+  display: block;
+  margin: -1.25rem -1.25rem 0.6rem;
+  height: 1.6rem;
+  background-color: #fff;
+  border-bottom: 3px solid var(--text);
+  background-image: radial-gradient(circle, #ff6fa5 4px, transparent 5px),
+    radial-gradient(circle, #ffd166 4px, transparent 5px), radial-gradient(circle, #06d6a0 4px, transparent 5px);
+  background-repeat: no-repeat;
+  background-position: 0.7rem 50%, 1.6rem 50%, 2.5rem 50%;
+}
+.retro .tarjeta:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--text);
+}
+.retro .tarjeta__nicho,
+.retro .tarjeta__bio {
+  color: var(--text);
+}
+.retro .tarjeta__nombre {
+  font-size: 1.05rem;
+  line-height: 1.4;
+  margin-block: 0.2rem;
+}
+.retro .tarjeta__pie {
+  color: var(--text);
+}
+.retro .post-item,
+.retro .post-item:first-child {
+  border-color: var(--text);
+  border-style: dashed;
+  border-width: 0 0 2px;
+}
+.retro .post-item__titulo {
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+.retro .post-item__enlace:hover .post-item__titulo {
+  color: var(--accent);
+}
+.retro .meta,
+.retro .post-item__desc {
+  color: var(--muted);
+}
+.retro .post-item__img {
+  border: 2px solid var(--text);
+  box-shadow: 3px 3px 0 var(--text);
+}
+.retro .pie {
+  background: #bde0fe;
+  border-top: 3px solid var(--text);
+  color: var(--text);
 }

@@ -1,8 +1,8 @@
 ---
-title: "Primer post de ejemplo"
-date: 2026-11-05
-description: "Una descripción corta que sale en el listado."
-cover: "/images/persona-1/portada-demo.jpg"
+title: "Otro post más de Tumoni"
+date: 2026-10-20
+description: "Para ver cómo queda una lista con varios posts."
+cover: ""
 ---
 
 Este es un post de ejemplo. Puedes escribir **negrita**, *cursiva* y [enlaces](https://astro.build).
@@ -18,5 +18,3 @@ Los posts se escriben desde el panel con un editor visual: una caja para el tít
 > Una cita destacada queda así de bien.
 
 Y para terminar, otro párrafo largo para ver cómo se lee en el móvil: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-![Una foto dentro del texto](/images/persona-1/portada-demo.jpg)

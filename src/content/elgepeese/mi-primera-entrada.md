@@ -1,7 +1,7 @@
 ---
-title: "Otro post más de la Persona 1"
-date: 2026-10-20
-description: "Para ver cómo queda una lista con varios posts."
+title: "Mi primera entrada"
+date: 2026-11-02
+description: "Un post de ejemplo, bórralo cuando quieras."
 cover: ""
 ---
 
