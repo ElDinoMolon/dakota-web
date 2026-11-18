@@ -1,11 +1,6 @@
 {
   "nombre": "Elgepeese",
-  "nicho": "",
-  "bio": "",
-  "color_principal": "",
-  "color_fondo": "",
-  "color_texto": "",
+  "color_principal": "#C8451B",
   "fuente": "sistema",
-  "tamano_texto": "normal",
-  "imagen_cabecera": ""
+  "tamano_texto": "normal"
 }
