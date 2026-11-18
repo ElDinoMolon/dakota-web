@@ -12,7 +12,7 @@ media:
   input: public/images
   output: /images
   rename: safe
-  categories: [image]
+  categories: [image, document, video, audio]
 
 content:
   # ===================================================================== PERSONA 1
