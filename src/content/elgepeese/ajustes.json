@@ -1,6 +1,7 @@
 {
   "nombre": "Elgepeese",
   "color_principal": "#000000",
+  "color_fondo": "#000000",
   "fuente": "sistema",
   "tamano_texto": "normal"
 }
