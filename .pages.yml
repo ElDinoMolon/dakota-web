@@ -1,10 +1,10 @@
 # Configuración del panel Pages CMS (https://pagescms.org/docs/)
 #
 # AÑADIR UNA PERSONA NUEVA:
-#   1. Copia la carpeta src/content/jancarlos → src/content/<nombre-nuevo>  (sin tildes ni espacios)
-#   2. Copia public/images/jancarlos → public/images/<nombre-nuevo>
-#   3. Copia el bloque "PERSONA 3" de abajo (de "- name: jancarlos" hasta el final de su bloque)
-#      y cambia "jancarlos" por "<nombre-nuevo>" en todas partes del bloque (8 veces, busca y reemplaza).
+#   1. Copia la carpeta src/content/eldinomolon → src/content/<nombre-nuevo>  (sin tildes ni espacios)
+#   2. Copia public/images/eldinomolon → public/images/<nombre-nuevo>
+#   3. Copia el bloque "PERSONA 3" de abajo (de "- name: eldinomolon" hasta el final de su bloque)
+#      y cambia "eldinomolon" por "<nombre-nuevo>" en todas partes del bloque (8 veces, busca y reemplaza).
 #   4. Edita ajustes.json de la carpeta nueva y borra los posts de ejemplo.
 
 # Las fotos se suben a public/images/<persona>/ y en la web se ven como /images/<persona>/foto.jpg
@@ -136,14 +136,14 @@ content:
             options: { path: public/images/elgepeese }
 
   # ===================================================================== PERSONA 3
-  - name: jancarlos
-    label: Jan Carlos
+  - name: eldinomolon
+    label: ElDinoMolon
     type: group
     items:
-      - name: jancarlos-posts
+      - name: eldinomolon-posts
         label: Posts
         type: collection
-        path: src/content/jancarlos
+        path: src/content/eldinomolon
         exclude: [ajustes.json]
         subfolders: false
         filename: "{primary}.md"
@@ -161,15 +161,15 @@ content:
           - name: cover
             label: Imagen de portada (opcional)
             type: image
-            options: { path: public/images/jancarlos }
+            options: { path: public/images/eldinomolon }
           - name: body
             label: Texto
             type: rich-text
-            options: { format: markdown, path: public/images/jancarlos }
-      - name: jancarlos-ajustes
+            options: { format: markdown, path: public/images/eldinomolon }
+      - name: eldinomolon-ajustes
         label: Mi sección y estilo
         type: file
-        path: src/content/jancarlos/ajustes.json
+        path: src/content/eldinomolon/ajustes.json
         format: json
         operations: { delete: false }
         fields:
@@ -193,4 +193,4 @@ content:
           - name: imagen_cabecera
             label: Imagen de cabecera (opcional)
             type: image
-            options: { path: public/images/jancarlos }
+            options: { path: public/images/eldinomolon }
